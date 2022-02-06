@@ -1,8 +1,7 @@
-import React, { useMemo, useState } from "react";
-import { View, Image, StyleSheet, Alert } from "react-native";
+import React, { useMemo } from "react";
+import { Image } from "react-native";
 import { SvgUri } from "react-native-svg";
 import { useQuery } from "react-query";
-import { Loader } from "../Loader/Loader";
 
 type TransactionImageProps = {
   imageUrl: string;
@@ -17,6 +16,9 @@ export const TransactionImage = ({
 }: TransactionImageProps) => {
   const imageExtension = useMemo(() => imageUrl.split(".").pop(), [imageUrl]);
 
+  // Doing this because .svg icons return 403
+  // and I couldn't find a library for displaying SVGs
+  // giving the possibility to have a fallback file
   const { data: useDefault } = useQuery(
     imageUrl,
     async (): Promise<boolean> => {
@@ -32,7 +34,6 @@ export const TransactionImage = ({
 
   const renderImage = () => {
     return imageExtension === "svg" ? (
-      // <View style={{ width, minHeight: height }} />
       <SvgUri width={width} height={height} uri={imageUrl} />
     ) : (
       <Image
