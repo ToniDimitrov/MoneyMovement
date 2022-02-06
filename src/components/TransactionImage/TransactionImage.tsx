@@ -9,12 +9,12 @@ type TransactionImageProps = {
   height: string | number;
 };
 
-export const TransactionImage = ({
+const TransactionImageComponent = ({
   imageUrl,
   width,
   height,
 }: TransactionImageProps) => {
-  const imageExtension = useMemo(() => imageUrl.split(".").pop(), [imageUrl]);
+  const imageExtension = imageUrl.split(".").pop();
 
   // Doing this because .svg icons return 403
   // and I couldn't find a library for displaying SVGs
@@ -56,3 +56,5 @@ export const TransactionImage = ({
 
   return <>{useDefault ? renderDefaultImage() : renderImage()}</>;
 };
+
+export const TransactionImage = React.memo(TransactionImageComponent);
