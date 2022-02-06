@@ -7,9 +7,9 @@ const categoryNameMap: { [key: string]: string } = {
   transportation: "Transportation",
   home: "Home",
   bars_and_restaurants: "Bars & Restaurants",
-  unknown_category: "Unknown",
+  unknown: "Unknown",
 };
 
 export const getCategoryName = (value: string): string => {
-  return categoryNameMap[value];
+  return categoryNameMap[value] ?? categoryNameMap["unknown"];
 };

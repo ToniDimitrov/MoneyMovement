@@ -6,7 +6,8 @@ export const groupTransactionsByDate = (
 ): Section<Transaction>[] => {
   const result = transactions.reduce(
     (acc: { [key: string]: Transaction[] }, cur: Transaction) => {
-      const date = moment(cur.createdAt).format("DD/MM/YYYY");
+      const momentDate = moment(cur.createdAt, "YYYY-MM-DD HH:mm", true);
+      const date = momentDate.isValid() ? momentDate.format("DD/MM/YYYY") : "";
 
       if (!acc[date]) {
         acc[date] = [cur];
