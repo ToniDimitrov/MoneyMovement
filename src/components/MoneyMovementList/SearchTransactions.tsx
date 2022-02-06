@@ -2,19 +2,16 @@ import React from "react";
 import { StyleSheet, TextInput, View } from "react-native";
 
 type SearchTransactionsProps = {
-  searchValue?: string;
   onSearchValueChanged: (value: string) => void;
 };
 
 export const SearchTransactions = ({
-  searchValue,
   onSearchValueChanged,
 }: SearchTransactionsProps) => {
   return (
     <View style={styles.container}>
       <TextInput
         placeholder="Search..."
-        value={searchValue}
         onChangeText={onSearchValueChanged}
         style={styles.input}
       />
