@@ -18,6 +18,7 @@ import { groupTransactionsByDate } from "../../utils/sectionUtils";
 import { Loader } from "../Loader/Loader";
 import { MoneyMovementListItem } from "./MoneyMovementListItem";
 import { SearchTransactions } from "./SearchTransactions";
+import { SectionHeader } from "./SectionHeader";
 
 export const MoneyMovementList = ({ navigation }: TransactionsScreenProps) => {
   const [searchValue, setSearchValue] = useState<string>("");
@@ -45,9 +46,9 @@ export const MoneyMovementList = ({ navigation }: TransactionsScreenProps) => {
     allTransactions,
   ]);
 
-  const onItemPress = (item: Transaction) => {
+  const onItemPress = useCallback((item: Transaction) => {
     navigation.navigate("Transaction", { item });
-  };
+  }, []);
 
   const renderMoneyMovement = ({ item }: { item: Transaction }) => {
     return <MoneyMovementListItem transaction={item} onPress={onItemPress} />;
@@ -57,10 +58,7 @@ export const MoneyMovementList = ({ navigation }: TransactionsScreenProps) => {
     section,
   }: {
     section: Section<Transaction>;
-  }) =>
-    !section.data.length ? null : (
-      <Text style={styles.sectionTitle}>{section.title}</Text>
-    );
+  }) => <SectionHeader section={section} />;
 
   if (isFetching) {
     return <Loader size="large" />;
@@ -86,12 +84,5 @@ const styles = StyleSheet.create({
   listContainer: {
     flex: 1,
     justifyContent: "center",
-  },
-  sectionTitle: {
-    paddingLeft: 10,
-    paddingTop: 15,
-    fontSize: 16,
-    fontWeight: "600",
-    color: "gray",
   },
 });
