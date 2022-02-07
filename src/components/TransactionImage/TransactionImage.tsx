@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { Image } from "react-native";
 import { SvgUri } from "react-native-svg";
 import { useQuery } from "react-query";

@@ -3,5 +3,5 @@ import { RootStackParamList } from "./RootStackParamList";
 
 export type TransactionsScreenProps = NativeStackScreenProps<
   RootStackParamList,
-  "TransactionsHistory"
+  "History"
 >;

@@ -6,7 +6,9 @@ export const fetchTransactions = async (): Promise<Transaction[]> => {
     "https://git.novus.world/api/v1/repos/Novus-public/react-engi-task/raw/data%2Ftransactions.json",
   );
 
-  if (!result.ok) throw Error("An error occurred with your request.");
+  if (!result.ok) {
+    throw Error("An error occurred with your request.");
+  }
 
   const json = await result.json();
   const transactionsRaw: TransactionDTO[] = json.transactions;

@@ -1,13 +1,5 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import {
-  Dimensions,
-  SafeAreaView,
-  SectionList,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import React, { useCallback, useMemo, useState } from "react";
+import { SafeAreaView, SectionList, StyleSheet, Text } from "react-native";
 import { useQuery } from "react-query";
 import { Persistor } from "../../services/persistor";
 
@@ -35,7 +27,9 @@ export const MoneyMovementList = ({ navigation }: TransactionsScreenProps) => {
   });
 
   const filteredTransactions = useMemo(() => {
-    if (!allTransactions) return [];
+    if (!allTransactions) {
+      return [];
+    }
 
     return groupTransactionsByDate(
       searchValue !== ""
@@ -44,13 +38,17 @@ export const MoneyMovementList = ({ navigation }: TransactionsScreenProps) => {
     );
   }, [allTransactions, searchValue]);
 
-  const handleSearchChange = useCallback(debounce(setSearchValue, 500), [
-    allTransactions,
-  ]);
+  // Fixed if debounce is returned in an arrow function
+  // but this returns a new reference of debounce which breaks it
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const handleSearchChange = useCallback(debounce(setSearchValue, 500), []);
 
-  const onItemPress = useCallback((item: Transaction) => {
-    navigation.navigate("Transaction", { item });
-  }, []);
+  const onItemPress = useCallback(
+    (item: Transaction) => {
+      navigation.navigate("Transaction", { item });
+    },
+    [navigation],
+  );
 
   const renderMoneyMovement = ({ item }: { item: Transaction }) => {
     return <MoneyMovementListItem transaction={item} onPress={onItemPress} />;
@@ -68,6 +66,7 @@ export const MoneyMovementList = ({ navigation }: TransactionsScreenProps) => {
 
   return (
     <SafeAreaView style={styles.listContainer}>
+      <Text style={styles.header}>Transactions</Text>
       <SearchTransactions onSearchValueChanged={handleSearchChange} />
       <SectionList
         removeClippedSubviews={true}
@@ -90,5 +89,11 @@ const styles = StyleSheet.create({
   listContainer: {
     flex: 1,
     justifyContent: "center",
+  },
+  header: {
+    paddingHorizontal: 10,
+    paddingTop: 10,
+    fontSize: 22,
+    fontWeight: "600",
   },
 });

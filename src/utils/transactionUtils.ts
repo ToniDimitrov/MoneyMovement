@@ -11,5 +11,5 @@ const categoryNameMap: { [key: string]: string } = {
 };
 
 export const getCategoryName = (value: string): string => {
-  return categoryNameMap[value] ?? categoryNameMap["unknown"];
+  return categoryNameMap[value] ?? categoryNameMap.unknown;
 };

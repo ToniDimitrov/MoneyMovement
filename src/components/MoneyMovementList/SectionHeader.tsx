@@ -32,7 +32,9 @@ export const SectionHeader = ({ section }: SectionHeaderProps) => {
       .join(" & ");
   }, [section]);
 
-  if (!hasData) return null;
+  if (!hasData) {
+    return null;
+  }
 
   return (
     <View style={styles.container}>

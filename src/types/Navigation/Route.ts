@@ -1,13 +1,16 @@
-import { NativeStackNavigationOptions } from "@react-navigation/native-stack";
+import {
+  NativeStackNavigationOptions,
+  NativeStackScreenProps,
+} from "@react-navigation/native-stack";
 import { ComponentType } from "react";
 import { RootStackParamList } from "./RootStackParamList";
-import { TransactionScreenProps } from "./TransactionScreenProps";
-import { TransactionsScreenProps } from "./TransactionsHistoryScreenProps";
 
-export type Route<T extends NativeStackScreenProps> = {
+export type Route = {
   name: keyof RootStackParamList;
   component: ComponentType<any>;
   options?:
     | NativeStackNavigationOptions
-    | ((T) => NativeStackNavigationOptions);
+    | ((
+        params: NativeStackScreenProps<RootStackParamList, any>,
+      ) => NativeStackNavigationOptions);
 };

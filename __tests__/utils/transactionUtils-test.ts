@@ -1,6 +1,3 @@
-import { Transaction } from "../../src/types";
-import { groupTransactionsByDate } from "../../src/utils/sectionUtils";
-import { toTitleCase } from "../../src/utils/stringUtils";
 import { getCategoryName } from "../../src/utils/transactionUtils";
 
 describe("getCategoryName", () => {

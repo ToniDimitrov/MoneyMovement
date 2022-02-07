@@ -21,9 +21,10 @@ const MoneyMovementListItemComponent = ({
   return (
     <TouchableOpacity
       style={styles.moneyMovementContainer}
-      onPress={handleOnPress}>
+      onPress={handleOnPress}
+    >
       <>
-        <View style={{ height: "100%", paddingRight: 15 }}>
+        <View style={styles.imageContainer}>
           <TransactionImage
             imageUrl={transaction.icon}
             width={60}
@@ -57,6 +58,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: "white",
   },
+  imageContainer: { height: "100%", paddingRight: 15 },
   basicInfoContainer: {
     flex: 3,
   },

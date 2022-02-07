@@ -1,5 +1,3 @@
-import { Transaction } from "../../src/types";
-import { groupTransactionsByDate } from "../../src/utils/sectionUtils";
 import { toTitleCase } from "../../src/utils/stringUtils";
 
 describe("toTitleCase", () => {
