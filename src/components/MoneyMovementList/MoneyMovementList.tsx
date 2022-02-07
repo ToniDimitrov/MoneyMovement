@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
+  Dimensions,
   SafeAreaView,
   SectionList,
   StyleSheet,
@@ -23,14 +24,15 @@ import { SectionHeader } from "./SectionHeader";
 export const MoneyMovementList = ({ navigation }: TransactionsScreenProps) => {
   const [searchValue, setSearchValue] = useState<string>("");
 
-  const { data: allTransactions, isFetching } = useQuery(
-    "transactions",
-    fetchTransactions,
-    {
-      onSuccess: data => Persistor.setItem("user_transactions", data),
-      onError: () => Persistor.getItem("user_transactions", []),
-    },
-  );
+  const {
+    data: allTransactions,
+    isFetching,
+    isLoading,
+    refetch: refetchTransactions,
+  } = useQuery("transactions", fetchTransactions, {
+    onSuccess: data => Persistor.setItem("user_transactions", data),
+    onError: () => Persistor.getItem("user_transactions", []),
+  });
 
   const filteredTransactions = useMemo(() => {
     if (!allTransactions) return [];
@@ -60,9 +62,10 @@ export const MoneyMovementList = ({ navigation }: TransactionsScreenProps) => {
     section: Section<Transaction>;
   }) => <SectionHeader section={section} />;
 
-  if (isFetching) {
+  if (isLoading) {
     return <Loader size="large" />;
   }
+
   return (
     <SafeAreaView style={styles.listContainer}>
       <SearchTransactions onSearchValueChanged={handleSearchChange} />
@@ -75,6 +78,9 @@ export const MoneyMovementList = ({ navigation }: TransactionsScreenProps) => {
         sections={filteredTransactions}
         renderItem={renderMoneyMovement}
         renderSectionHeader={renderSectionHeader}
+        refreshing={isFetching}
+        onRefresh={refetchTransactions}
+        ListEmptyComponent={<Text>No items found</Text>}
       />
     </SafeAreaView>
   );

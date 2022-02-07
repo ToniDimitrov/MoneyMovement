@@ -20,7 +20,7 @@ export const SearchTransactions = ({
 };
 
 const styles = StyleSheet.create({
-  container: { height: 50, marginBottom: 20 },
+  container: { height: 40, marginBottom: 20 },
   input: {
     backgroundColor: "#ffffff",
     borderRadius: 10,
