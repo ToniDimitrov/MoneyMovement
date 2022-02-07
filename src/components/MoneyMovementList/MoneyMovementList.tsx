@@ -1,8 +1,15 @@
 import React, { useCallback, useMemo, useState } from "react";
-import { SafeAreaView, SectionList, StyleSheet, Text } from "react-native";
+import {
+  Dimensions,
+  SafeAreaView,
+  SectionList,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { useQuery } from "react-query";
-import { Persistor } from "../../services/persistor";
 
+import { Persistor } from "../../services/persistor";
 import { fetchTransactions } from "../../services/transactions";
 import { Section, TransactionsScreenProps } from "../../types";
 import { Transaction } from "../../Types/transaction";
@@ -12,6 +19,7 @@ import { Loader } from "../Loader/Loader";
 import { MoneyMovementListItem } from "./MoneyMovementListItem";
 import { SearchTransactions } from "./SearchTransactions";
 import { SectionHeader } from "./SectionHeader";
+import { TransactionChart } from "./TransactionsChart";
 
 export const MoneyMovementList = ({ navigation }: TransactionsScreenProps) => {
   const [searchValue, setSearchValue] = useState<string>("");
@@ -60,12 +68,24 @@ export const MoneyMovementList = ({ navigation }: TransactionsScreenProps) => {
     section: Section<Transaction>;
   }) => <SectionHeader section={section} />;
 
+  const renderNoItems = () => (
+    <View style={styles.noItemsContainer}>
+      <Text style={styles.noItemLabel}>No transactions found.</Text>
+    </View>
+  );
+
   if (isLoading) {
     return <Loader size="large" />;
   }
 
   return (
     <SafeAreaView style={styles.listContainer}>
+      <Text style={styles.header}>Analytics</Text>
+      <TransactionChart
+        transactions={allTransactions || []}
+        width={Dimensions.get("window").width}
+        height={180}
+      />
       <Text style={styles.header}>Transactions</Text>
       <SearchTransactions onSearchValueChanged={handleSearchChange} />
       <SectionList
@@ -79,7 +99,7 @@ export const MoneyMovementList = ({ navigation }: TransactionsScreenProps) => {
         renderSectionHeader={renderSectionHeader}
         refreshing={isFetching}
         onRefresh={refetchTransactions}
-        ListEmptyComponent={<Text>No items found</Text>}
+        ListEmptyComponent={renderNoItems}
       />
     </SafeAreaView>
   );
@@ -95,5 +115,15 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     fontSize: 22,
     fontWeight: "600",
+  },
+  noItemsContainer: {
+    marginTop: 30,
+    height: "100%",
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  noItemLabel: {
+    fontWeight: "500",
   },
 });

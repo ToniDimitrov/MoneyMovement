@@ -12,6 +12,7 @@ export const fetchTransactions = async (): Promise<Transaction[]> => {
 
   const json = await result.json();
   const transactionsRaw: TransactionDTO[] = json.transactions;
+
   const transactions: Transaction[] = transactionsRaw.map(x => {
     return {
       name: x.name,
