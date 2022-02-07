@@ -5,6 +5,13 @@
 You will need Node, Watchman, the React Native command line interface, Xcode and CocoaPods.
 
 While you can use any editor of your choice to develop your app, you will need to install Xcode in order to set up the necessary tooling to build your React Native app for iOS.
+
+### Yarn
+
+Yarn is a package manager for your code. It allows you to use and share (e.g. JavaScript) code with other developers from around the world. Yarn does this quickly, securely, and reliably so you don’t ever have to worry.
+
+We recommend installing Yarn by going through  [Yarn installation](https://classic.yarnpkg.com/lang/en/docs/install). 
+
 ### Node & Watchman
 
 We recommend installing Node and Watchman using  [Homebrew](http://brew.sh/). Run the following commands in a Terminal after installing Homebrew:
@@ -13,7 +20,7 @@ We recommend installing Node and Watchman using  [Homebrew](http://brew.sh/). Ru
 brew install node
 brew install watchman
 ```
-If you have already installed Node on your system, make sure it is Node 12 or newer.
+If you have already installed Node on your system, make sure it is has a version of ^12.22.0 || ^14.17.0 || >=16.0.0
 
 ### Xcode[​](https://reactnative.dev/docs/environment-setup#xcode "Direct link to heading")
 
@@ -55,12 +62,18 @@ cd .. && npx react-native run-ios --configuration Release
 yarn run test
 ```
 
-# Android (macOS)
+# Android (macOs)
 ## Installing dependencies
 
 You will need Node, Watchman, the React Native command line interface, a JDK, and Android Studio.
 
 While you can use any editor of your choice to develop your app, you will need to install Android Studio in order to set up the necessary tooling to build your React Native app for Android.
+
+### Yarn
+
+Yarn is a package manager for your code. It allows you to use and share (e.g. JavaScript) code with other developers from around the world. Yarn does this quickly, securely, and reliably so you don’t ever have to worry.
+
+We recommend installing Yarn by going through  [Yarn installation](https://classic.yarnpkg.com/lang/en/docs/install). 
 
 ### Node & Watchman
 
@@ -71,7 +84,7 @@ brew install node
 brew install watchman
 ```
 
-If you have already installed Node on your system, make sure it is Node 12 or newer.
+If you have already installed Node on your system, make sure it is has a version of ^12.22.0 || ^14.17.0 || >=16.0.0
 
 ### Java Development Kit
 
@@ -172,6 +185,12 @@ You will need Node, the React Native command line interface, a JDK, and Android 
 
 While you can use any editor of your choice to develop your app, you will need to install Android Studio in order to set up the necessary tooling to build your React Native app for Android.
 
+### Yarn
+
+Yarn is a package manager for your code. It allows you to use and share (e.g. JavaScript) code with other developers from around the world. Yarn does this quickly, securely, and reliably so you don’t ever have to worry.
+
+We recommend installing Yarn by going through  [Yarn installation](https://classic.yarnpkg.com/lang/en/docs/install). 
+
 ### Node, JDK
 
 We recommend installing Node via  [Chocolatey](https://chocolatey.org/), a popular package manager for Windows.
@@ -186,7 +205,7 @@ Open an Administrator Command Prompt (right click Command Prompt and select "Run
 choco install -y nodejs-lts openjdk11
 ```
 
-If you have already installed Node on your system, make sure it is Node 12 or newer. If you already have a JDK on your system, make sure it is version 11 or newer.
+If you have already installed Node on your system, make sure it is has a version of ^12.22.0 || ^14.17.0 || >=16.0.0. If you already have a JDK on your system, make sure it is version 11 or newer.
 
 > You can find additional installation options on  [Node's Downloads page](https://nodejs.org/en/download/).
 
