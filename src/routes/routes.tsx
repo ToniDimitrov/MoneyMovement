@@ -5,6 +5,9 @@ import {
 } from "../types";
 import { MoneyMovement } from "../components/MoneyMovement/MoneyMovement";
 import { MoneyMovementList } from "../components/MoneyMovementList/MoneyMovementList";
+import React from "react";
+import { NavigationHeaderTitle } from "../components/Navigation/NavigationHeaderTitle";
+import moment from "moment";
 
 export const routes: Route<TransactionsScreenProps & TransactionScreenProps>[] =
   [
@@ -16,7 +19,14 @@ export const routes: Route<TransactionsScreenProps & TransactionScreenProps>[] =
       name: "Transaction",
       component: MoneyMovement,
       options: ({ route }: TransactionScreenProps) => ({
-        title: route.params.item.name,
+        headerTitle: () => (
+          <NavigationHeaderTitle
+            title={route.params.item.name}
+            subtitle={moment(route.params.item.createdAt).format(
+              "DD/MM/YYYY HH:mm",
+            )}
+          />
+        ),
       }),
     },
   ];
