@@ -41,7 +41,9 @@ export const MoneyMovementList = ({ navigation }: TransactionsScreenProps) => {
 
     return groupTransactionsByDate(
       searchValue !== ""
-        ? allTransactions.filter(x => x.name.includes(searchValue))
+        ? allTransactions.filter(x =>
+            x.name.toLowerCase().includes(searchValue.toLowerCase()),
+          )
         : allTransactions,
     );
   }, [allTransactions, searchValue]);
