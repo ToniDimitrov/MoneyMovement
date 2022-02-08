@@ -1,5 +1,6 @@
 import React from "react";
-import { Image } from "react-native";
+import { StyleSheet } from "react-native";
+import FastImage from "react-native-fast-image";
 import { SvgUri } from "react-native-svg";
 import { useQuery } from "react-query";
 
@@ -9,13 +10,13 @@ type TransactionImageProps = {
   height: string | number;
 };
 
+const defaultImagePath = "../../../assets/icons/alert-circle-outline.png";
+
 const TransactionImageComponent = ({
   imageUrl,
   width,
   height,
 }: TransactionImageProps) => {
-  const imageExtension = imageUrl.split(".").pop();
-
   // Doing this because .svg icons return 403
   // and I couldn't find a library for displaying SVGs
   // giving the possibility to have a fallback file
@@ -32,29 +33,37 @@ const TransactionImageComponent = ({
     { refetchOnMount: false },
   );
 
-  const renderImage = () => {
-    return imageExtension === "svg" ? (
-      <SvgUri width={width} height={height} uri={imageUrl} />
-    ) : (
-      <Image
-        source={{
-          uri: imageUrl,
-        }}
-        style={{ width, minHeight: height }}
+  const imageExtension = imageUrl.split(".").pop();
+  const useSVG = imageExtension === "svg" && !useDefault;
+
+  return (
+    <>
+      <SvgUri
+        width={useSVG ? width : 0}
+        height={useSVG ? height : 0}
+        uri={useSVG ? imageUrl : ""}
+      />
+      <FastImage
+        source={useDefault ? require(defaultImagePath) : { uri: imageUrl }}
+        style={styles(width, height, useSVG).image}
         resizeMode="contain"
       />
-    );
-  };
-
-  const renderDefaultImage = () => (
-    <Image
-      source={require("../../../assets/icons/alert-circle-outline.png")}
-      style={{ width, minHeight: height, height: height }}
-      resizeMode="contain"
-    />
+    </>
   );
-
-  return <>{useDefault ? renderDefaultImage() : renderImage()}</>;
 };
 
 export const TransactionImage = React.memo(TransactionImageComponent);
+
+const styles = (
+  width: string | number,
+  height: string | number,
+  hide: boolean,
+) =>
+  StyleSheet.create({
+    image: {
+      display: hide ? "none" : "flex",
+      width: width,
+      minHeight: height,
+      height: height,
+    },
+  });
