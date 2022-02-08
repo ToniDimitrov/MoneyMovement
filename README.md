@@ -1,3 +1,18 @@
+# MoneyMovement
+This is a project written in react-native and typescript which lets you track your monetary transactions and their carbon footprint - making it easier to keep track of your personal impact on climate change.
+
+You can analyze your spending habits for the current month with the help of the chart or you can go search or scroll through all of the payments you've made - categorized and sorted by date.
+
+By pressing on a transaction in the list you'll be navigated to a view containing more detailed information about your payment.
+
+## Possible improvements
+- Improve configurability of the chart by adding the possibility to select a different date range.
+- Navigate to a list containing the selected day's transactions when pressing on a dot in the chart.
+- Add an additional chart tracking the summarized carbon footprint data.
+- Add support for filtering the list by transaction type and by category.
+- In the details view - make the category and type values pressable. When pressed they should lead you to a pre-filtered list containing only transactions of the selected type/category.
+- Add possibility to exclude a transaction from the analytics.
+
 # iOS
 
 ## Installing dependencies 
